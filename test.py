@@ -6,7 +6,7 @@ import warnings
 import torch
 
 # === Project Modules ===
-from models import ProLearn, Prototype
+from models import ProLearn, PSA
 from modules.dataset import MMSegDataset
 from modules.dataloader import MMSegDataLoader
 from modules.trainer import Trainer
@@ -66,7 +66,7 @@ def main():
         cfg.num_candidate = args.num_candidate
 
     # === Initialize prototype encoder and load precomputed features ===
-    prototype = Prototype(cfg).to(cfg.device)
+    prototype = PSA(cfg).to(cfg.device)
     prototype.load()
 
     # === Load trained segmentation model ===
