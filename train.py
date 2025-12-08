@@ -144,7 +144,7 @@ def main():
     )
 
     # === Prototype Fitting and Feature Precomputation ===
-    prototype.fit(dl_train_semi)
+    prototype.fit(dl_train)
 
     ds_train.precompute(
         encoder=prototype.encoder,
