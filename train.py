@@ -93,6 +93,19 @@ def main():
 
     # Initialize model and optimization components
     model = ProLearn(cfg, prototype=prototype).to(cfg.device)
+
+    # Print model information
+    print("=" * 60)
+    print("MODEL SUMMARY")
+    print("=" * 60)
+    print(f"Model: {model.__class__.__name__}")
+    print(f"Device: {cfg.device}")
+    print(f"Total parameters: {sum(p.numel() for p in model.parameters()):,}")
+    print(f"Trainable parameters: {sum(p.numel() for p in model.parameters() if p.requires_grad):,}")
+    print("\nModel Architecture:")
+    print(model)
+    print("=" * 60)
+
     optimizer = AdamW(model.parameters(), lr=cfg.lr)
     scheduler = CosineAnnealingLR(optimizer, T_max=200, eta_min=1e-6)
 
@@ -140,8 +153,7 @@ def main():
         model_save_path=cfg.model_save_path,
         model_name=cfg.model_save_filename,
         max_epochs=cfg.max_epochs,
-        device=cfg.device,
-        logger=True
+        device=cfg.device
     )
 
     # === Prototype Fitting and Feature Precomputation ===
