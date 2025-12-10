@@ -140,11 +140,12 @@ def main():
         model_save_path=cfg.model_save_path,
         model_name=cfg.model_save_filename,
         max_epochs=cfg.max_epochs,
-        device=cfg.device
+        device=cfg.device,
+        logger=True
     )
 
     # === Prototype Fitting and Feature Precomputation ===
-    prototype.fit(dl_train)
+    prototype.fit(dl_train_semi)
 
     ds_train.precompute(
         encoder=prototype.encoder,
